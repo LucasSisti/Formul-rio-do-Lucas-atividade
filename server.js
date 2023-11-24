@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Middleware para processar dados POST
@@ -18,13 +17,8 @@ app.post('/processar-formulario', function (req, res) {
     const dtNascimento = req.body.txtdtnascimento;
     const senha = req.body.txtsenha;
     const senhaConfirmacao = req.body.txtsenhaconfirmacao;
- res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-// Iniciar o servidor
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
-// Adicione suas validações aqui
+
+    // Adicione suas validações aqui
     document.addEventListener('DOMContentLoaded', function () {
         var form = document.forms['cadastro'];
         form.addEventListener('submit', function (event) {
