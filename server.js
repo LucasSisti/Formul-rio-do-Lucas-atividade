@@ -18,8 +18,13 @@ app.post('/processar-formulario', function (req, res) {
     const dtNascimento = req.body.txtdtnascimento;
     const senha = req.body.txtsenha;
     const senhaConfirmacao = req.body.txtsenhaconfirmacao;
-
-    // Adicione suas validações aqui
+ res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+// Iniciar o servidor
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
+// Adicione suas validações aqui
     document.addEventListener('DOMContentLoaded', function () {
         var form = document.forms['cadastro'];
         form.addEventListener('submit', function (event) {
