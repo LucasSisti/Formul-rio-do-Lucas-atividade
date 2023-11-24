@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,7 +21,7 @@ function validarDados(dados) {
         erros.endereco = 'Campo obrigatório.';
     }
 
-    if (!dados.txte_mail) {
+    if (!dados.txtemail) {
         erros.email = 'Campo obrigatório.';
     }
 
@@ -57,7 +58,7 @@ function validarDados(dados) {
 
     // Verificando o formato do e-mail
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexEmail.test(dados.txte_mail)) {
+    if (!regexEmail.test(dados.txtemail)) {
         erros.email = 'Formato de e-mail inválido.';
     }
 
@@ -69,8 +70,10 @@ app.post('/cadastro', (req, res) => {
 
     // Validar dados
     const errosValidacao = validarDados(dados);
+
     if (Object.keys(errosValidacao).length > 0) {
-        return res.render('seuarquivohtml', {
+        // Se houver erros, renderize o formulário novamente com mensagens de erro
+        return res.render('formulario', {
             mensagemErroNome: errosValidacao.nome,
             mensagemErroEndereco: errosValidacao.endereco,
             mensagemErroEmail: errosValidacao.email,
@@ -79,13 +82,37 @@ app.post('/cadastro', (req, res) => {
             mensagemErroSenhaConfirmacao: errosValidacao.senhaConfirmacao,
             mensagemErroSexo: errosValidacao.sexo,
             mensagemErroAnimais: errosValidacao.animais,
-            // Passe os dados de formulário de volta para o formulário para manter os valores preenchidos
+            // Passe os dados do formulário de volta para o formulário para manter os valores preenchidos
             dadosFormulario: dados,
         });
     }
 
+    // Se não houver erros, você pode prosseguir com o processamento dos dados
     console.log('Dados do formulário:', dados);
+    
+    // Aqui você pode adicionar lógica adicional para processar os dados
+
+    // Em vez de enviar 'Formulário recebido com sucesso!', você pode redirecionar ou enviar uma resposta adequada
     res.send('Formulário recebido com sucesso!');
+});
+
+// Configurando o mecanismo de visualização EJS
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+// Rota para renderizar o formulário inicial
+app.get('/', (req, res) => {
+    res.render('formulario', {
+        mensagemErroNome: '',
+        mensagemErroEndereco: '',
+        mensagemErroEmail: '',
+        mensagemErroDataNascimento: '',
+        mensagemErroSenha: '',
+        mensagemErroSenhaConfirmacao: '',
+        mensagemErroSexo: '',
+        mensagemErroAnimais: '',
+        dadosFormulario: {},
+    });
 });
 
 app.listen(port, () => {
