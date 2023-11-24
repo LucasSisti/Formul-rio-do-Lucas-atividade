@@ -1,64 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
 </head>
+
 <body>
-    <form action="/cadastro" method="GET" class="row g-3 needs-validation" novalidate>
-        <fieldset class="border p-2">
-            <legend>Cadastro do Formulário</legend>
-            <div class="col-md-4">
-                <label for="nome" class="form-label">Seu Nome: </label>
-                <br>
-                <input type="text" class="form-control" id="nome" name="nome" required>
-                <div class="invalid-feedback">
-                    Digite um nome!
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label for="sobrenome" class="form-label">Seu Sobrenome</label>
-                <input type="text" class="form-control" id="sobrenome" name="sobrenome" required>
-                <div class="invalid-feedback">
-                    Digite um sobrenome!
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label for="username" class="form-label">Nome de Usuário:</label>
-                <div class="input-group has-validation">
-                    <span class="input-group-text" id="inputGroupPrepend">@</span>
-                    <input type="text" class="form-control" id="username" name="username" aria-describedby="inputGroupPrepend" required>
-                    <div class="invalid-feedback">
-                        Digite um nome de usuário!
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-primary mt-4" type="submit">Cadastrar</button>
-            </div>
-        </fieldset>
+    <h1>Faça seu Cadastro na ONG Save Pets (ONG DO PI)</h1>
+    <h2>Cadastro</h2>
+    <form name="cadastro" action="http://localhost:3000/cadastro" method="post">
+        <p>Digite seu nome:</p>
+        <input type="text" name="txtnome" size="40" maxlength="35">
+        <p>Sua data de nascimento:</p>
+        <input type="text" name="txtnome" size="40" maxlength="10">
+        <p>Digite seu endereço:</p>
+        <input type="text" name="txtend" size="40" maxlength="50">
+        <p>Complemento:</p>
+        <input type="text" name="txtend" size="10" maxlength="10">
+        <p>Digite seu e-mail:</p>
+        <input type="text" name="txte-mail" size="40" maxlength="30">
+        <p>Seu sexo:</p>
+        <input type="radio" name="opcao1" value="1" />Masculino <input type="radio" name="opcao1" value="1" />Feminino
+        <input type="radio" name="opcao1" Ivalue="1" />Outro <input type="radio" name="opcao1" Ivalue="1" />Não quero
+        informar
+        <p>Crie a sua senha:</p>
+        <p>sua senha deve ter entre 7 e 14 caracteres</p>
+        <input type="password" name="txtsenha" size="20" maxlength="14" value="">
+        <p>Confirme sua senha:</p>
+        <input type="password" name="txtsenha" size="20" maxlength="14" value="">
+        <p>Que tipos de animais você adotaria?</p>
+        <input type=checkbox name="opcao1" value="1" />Cachorros<br />
+        <input type=checkbox name="opcao2" value="2" />Gatos<br />
+        <input type=checkbox name="opcao3" value="3" />Raposas<br />
+        <input type=checkbox name="opcao4" value="4" />Ratos<br />
+        <input type=checkbox name="opcao5" value="5" />Capivaras<br />
+        <input type=checkbox name="opcao6" value="6" />Pássaros<br />
+        <input type=checkbox name="opcao7" value="7" />Hamsters<br />
     </form>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script>
-            (function () {
-    'use strict'
-
-    var forms = document.querySelectorAll('.needs-validation')
-    const form = forms[0];
-
-        form.addEventListener('submit', (event)=> {
-            if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-            }
-
-            form.classList.add('was-validated')
-        }, false)
-        })
-    ()
-    </script>
-</body>
+    </body>
 </html>
