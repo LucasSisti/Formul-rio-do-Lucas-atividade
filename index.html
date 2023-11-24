@@ -15,31 +15,52 @@
     <form name="cadastro" action="http://localhost:3000/cadastro" method="post">
         <p>Digite seu nome:</p>
         <input type="text" name="txtnome" size="40" maxlength="35">
+        <p style="color: red;">{{ mensagemErroNome }}</p>
+
         <p>Sua data de nascimento:</p>
-        <input type="text" name="txtnome" size="40" maxlength="10">
+        <input type="text" name="txtdtnascimento" size="40" maxlength="10">
+        <p style="color: red;">{{ mensagemErroDataNascimento }}</p>
+
         <p>Digite seu endereço:</p>
         <input type="text" name="txtend" size="40" maxlength="50">
+        <p style="color: red;">{{ mensagemErroEndereco }}</p>
+
         <p>Complemento:</p>
-        <input type="text" name="txtend" size="10" maxlength="10">
+        <input type="text" name="txtcomplemento" size="10" maxlength="10">
+
         <p>Digite seu e-mail:</p>
-        <input type="text" name="txte-mail" size="40" maxlength="30">
+        <input type="text" name="txtemail" size="40" maxlength="30">
+        <p style="color: red;">{{ mensagemErroEmail }}</p>
+
         <p>Seu sexo:</p>
-        <input type="radio" name="opcao1" value="1" />Masculino <input type="radio" name="opcao1" value="1" />Feminino
-        <input type="radio" name="opcao1" Ivalue="1" />Outro <input type="radio" name="opcao1" Ivalue="1" />Não quero
-        informar
+        <input type="radio" name="opcaosexo" value="masculino" />Masculino
+        <input type="radio" name="opcaosexo" value="feminino" />Feminino
+        <input type="radio" name="opcaosexo" value="outro" />Outro
+        <input type="radio" name="opcaosexo" value="naoinformar" />Não quero informar
+        <!-- Mensagem de erro para o sexo -->
+        <p style="color: red;">{{ mensagemErroSexo }}</p>
+
         <p>Crie a sua senha:</p>
-        <p>sua senha deve ter entre 7 e 14 caracteres</p>
+        <p>Sua senha deve ter entre 7 e 14 caracteres</p>
         <input type="password" name="txtsenha" size="20" maxlength="14" value="">
+         <p style="color: red;">{{ mensagemErroSenha }}</p>
+
         <p>Confirme sua senha:</p>
-        <input type="password" name="txtsenha" size="20" maxlength="14" value="">
+        <input type="password" name="txtsenhaconfirmacao" size="20" maxlength="14" value="">
+        <p style="color: red;">{{ mensagemErroSenhaConfirmacao }}</p>
+
         <p>Que tipos de animais você adotaria?</p>
-        <input type=checkbox name="opcao1" value="1" />Cachorros<br />
-        <input type=checkbox name="opcao2" value="2" />Gatos<br />
-        <input type=checkbox name="opcao3" value="3" />Raposas<br />
-        <input type=checkbox name="opcao4" value="4" />Ratos<br />
-        <input type=checkbox name="opcao5" value="5" />Capivaras<br />
-        <input type=checkbox name="opcao6" value="6" />Pássaros<br />
-        <input type=checkbox name="opcao7" value="7" />Hamsters<br />
+        <input type=checkbox name="opcaoanimal" value="cachorros" />Cachorros<br />
+        <input type=checkbox name="opcaoanimal" value="gatos" />Gatos<br />
+        <input type=checkbox name="opcaoanimal" value="raposas" />Raposas<br />
+        <input type=checkbox name="opcaoanimal" value="ratos" />Ratos<br />
+        <input type=checkbox name="opcaoanimal" value="capivaras" />Capivaras<br />
+        <input type=checkbox name="opcaoanimal" value="passaros" />Pássaros<br />
+        <input type=checkbox name="opcaoanimal" value="hamsters" />Hamsters<br />
+        <p style="color: red;">{{ mensagemErroAnimais }}</p>
+
+        <input type="submit" value="Enviar">
     </form>
-    </body>
+</body>
+
 </html>
