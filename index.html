@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
     <script src="server.js"></script>
+    <title>Document</title>
 </head>
 
 <body>
     <h1>Faça seu Cadastro na ONG Save Pets (ONG DO PI)</h1>
     <h2>Cadastro</h2>
-    <form name="cadastro" method="post" action="/processar-formulario">
+    <form name="cadastro" method="post" action="/processar-formulario" onsubmit="return validarFormulario()">
         <p>Digite seu nome:</p>
         <input type="text" name="txtnome" size="40" maxlength="35">
         
@@ -21,7 +21,6 @@
         <input type="text" name="txtdtnascimento" size="40" maxlength="10">
         
         <p>Digite seu endereço:</p> 
-
         <input type="text" name="txtend" size="40" maxlength="50">
         
         <p>Complemento:</p>
@@ -44,16 +43,18 @@
         <input type="password" name="txtsenhaconfirmacao" size="20" maxlength="14" value="">
         
         <p>Que tipos de animais você adotaria?</p>
-        <input type=checkbox name="opcaoanimal" value="cachorros" />Cachorros<br />
-        <input type=checkbox name="opcaoanimal" value="gatos" />Gatos<br />
-        <input type=checkbox name="opcaoanimal" value="raposas" />Raposas<br />
-        <input type=checkbox name="opcaoanimal" value="ratos" />Ratos<br />
-        <input type=checkbox name="opcaoanimal" value="capivaras" />Capivaras<br />
-        <input type=checkbox name="opcaoanimal" value="passaros" />Pássaros<br />
-        <input type=checkbox name="opcaoanimal" value="hamsters" />Hamsters<br />
+        <input type="checkbox" name="opcaoanimal" value="cachorros" />Cachorros<br />
+        <input type="checkbox" name="opcaoanimal" value="gatos" />Gatos<br />
+        <input type="checkbox" name="opcaoanimal" value="raposas" />Raposas<br />
+        <input type="checkbox" name="opcaoanimal" value="ratos" />Ratos<br />
+        <input type="checkbox" name="opcaoanimal" value="capivaras" />Capivaras<br />
+        <input type="checkbox" name="opcaoanimal" value="passaros" />Pássaros<br />
+        <input type="checkbox" name="opcaoanimal" value="hamsters" />Hamsters<br />
        
         <input type="submit" value="Enviar">
     </form>
+
+    <script src="client-side-validation.js"></script>
 </body>
 
 </html>
