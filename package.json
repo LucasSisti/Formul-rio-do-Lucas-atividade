@@ -1,0 +1,25 @@
+{
+  "name": "projeto-node",
+  "version": "1.0.0",
+  "description": "meu projeto",
+  "main": "index.js",
+  "scripts": {
+    "test": "oi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasSisti/Formul-rio-do-Lucas-atividade.git"
+  },
+  "keywords": [
+    "form"
+  ],
+  "author": "lucas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucasSisti/Formul-rio-do-Lucas-atividade/issues"
+  },
+  "homepage": "https://github.com/LucasSisti/Formul-rio-do-Lucas-atividade#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
