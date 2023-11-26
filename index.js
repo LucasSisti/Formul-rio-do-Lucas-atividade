@@ -1,3 +1,20 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Seu código existente...
+
 app.post('/cadastro', (req, res) => {
   // Obtenha os dados do formulário do corpo da solicitação
   const nome = req.body.nome;
