@@ -41,6 +41,10 @@
       font-size: 16px;
     }
 
+    input[type="email"], input[type="tel"] {
+      background-color: #f2f8f5;
+    }
+
     button {
       background-color: #4caf50;
       color: white;
@@ -68,7 +72,7 @@
   <input type="email" id="email" name="email" required>
 
   <label for="telefone">Telefone:</label>
-  <input type="tel" id="telefone" name="telefone" pattern="[0-9()+\- ]*" placeholder="Digite o telefone" required>
+  <input type="tel" id="telefone" name="telefone" pattern="^(\d{10}|\d{2}\s\d{4,5}-\d{4})$" placeholder="Digite o telefone" required>
 
 
   <label for="dataNascimento">Data de Nascimento:</label>
