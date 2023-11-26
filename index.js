@@ -62,33 +62,33 @@
 </head>
 <body>
 
-<form action="/cadastro" method="post">
-  <h1>Formulário de Cadastro de Usuário</h1>
-
-  <label for="nome">Nome:</label>
-  <input type="text" id="nome" name="nome" required>
-
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required>
-
-  <label for="telefone">Telefone:</label>
-  <input type="tel" id="telefone" name="telefone" pattern="^(\d{10}|\d{2}\s\d{4,5}-\d{4})$" placeholder="Digite o telefone (ex: 1234567890)" title="Formato de telefone inválido" required maxlength="15">
-
-  <label for="dataNascimento">Data de Nascimento:</label>
-  <input type="date" id="dataNascimento" name="dataNascimento" required>
-
-  <label for="genero">Gênero:</label>
-  <select id="genero" name="genero">
-    <option value="masculino">Masculino</option>
-    <option value="feminino">Feminino</option>
-    <option value="outro">Outro</option>
-  </select>
-
-  <label for="interesses">Interesses:</label>
-  <input type="text" id="interesses" name="interesses" placeholder="Separe os interesses por vírgula">
-
-  <button type="submit">Cadastrar</button>
-</form>
+  <form action="/cadastro" method="post" onsubmit="return validarFormulario()">
+    <h1>Formulário de Cadastro de Usuário</h1>
+  
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome">
+  
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+  
+    <label for="telefone">Telefone:</label>
+    <input type="tel" id="telefone" name="telefone" placeholder="Digite o telefone" title="Formato de telefone inválido" maxlength="15">
+  
+    <label for="dataNascimento">Data de Nascimento:</label>
+    <input type="date" id="dataNascimento" name="dataNascimento">
+  
+    <label for="genero">Gênero:</label>
+    <select id="genero" name="genero">
+      <option value="masculino">Masculino</option>
+      <option value="feminino">Feminino</option>
+      <option value="outro">Outro</option>
+    </select>
+  
+    <label for="interesses">Interesses:</label>
+    <input type="text" id="interesses" name="interesses" placeholder="Separe os interesses por vírgula">
+  
+    <button type="submit">Cadastrar</button>
+  </form>
 
 </body>
 </html>
