@@ -1,18 +1,3 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
 app.post('/cadastro', (req, res) => {
   // Obtenha os dados do formulário do corpo da solicitação
   const nome = req.body.nome;
@@ -47,6 +32,7 @@ app.post('/cadastro', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
 // Função auxiliar para validar o formato do e-mail
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,6 +40,12 @@ function isValidEmail(email) {
 }
 
 // Função auxiliar para validar o formato do número de telefone
+function isValidPhone(phone) {
+  const phoneRegex = /^(\d{10}|\d{2}\s\d{4,5}-\d{4})$/;
+  return phoneRegex.test(phone);
+}
+
+// Adicione a função de validação de formulário
 function validarFormulario() {
   const telefoneInput = document.getElementById('telefone');
   const telefoneValue = telefoneInput.value.replace(/\D/g, ''); // Remover não dígitos
