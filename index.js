@@ -1,94 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário de Cadastro</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 
-    form {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 400px;
-      box-sizing: border-box;
-    }
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
+app.use(bodyParser.urlencoded({ extended: true }));
 
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 16px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 16px;
-    }
+app.use(express.static(path.join(__dirname, 'public')));
 
-    input[type="email"], input[type="tel"] {
-      background-color: #f2f8f5;
-    }
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
-    button {
-      background-color: #4caf50;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
+app.post('/cadastro', (req, res) => {
+  // Obtenha os dados do formulário do corpo da solicitação
+  const nome = req.body.nome;
+  const email = req.body.email;
+  const telefone = req.body.telefone;
+  const dataNascimento = req.body.dataNascimento;
+  const genero = req.body.genero;
+  const interesses = req.body.interesses;
 
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
-</head>
-<body>
+  // Validar os dados do formulário
+  const errors = [];
+  if (!nome) errors.push('Nome é obrigatório.');
+  if (!email || !isValidEmail(email)) errors.push('Email inválido.');
+  if (!telefone || !isValidPhone(telefone)) errors.push('Telefone inválido.');
+  if (!dataNascimento) errors.push('Data de Nascimento é obrigatória.');
 
-  <form action="/cadastro" method="post" onsubmit="return validarFormulario()">
-    <h1>Formulário de Cadastro de Usuário</h1>
-  
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome">
-  
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email">
-  
-    <label for="telefone">Telefone:</label>
-    <input type="tel" id="telefone" name="telefone" placeholder="Digite o telefone" title="Formato de telefone inválido" maxlength="15">
-  
-    <label for="dataNascimento">Data de Nascimento:</label>
-    <input type="date" id="dataNascimento" name="dataNascimento">
-  
-    <label for="genero">Gênero:</label>
-    <select id="genero" name="genero">
-      <option value="masculino">Masculino</option>
-      <option value="feminino">Feminino</option>
-      <option value="outro">Outro</option>
-    </select>
-  
-    <label for="interesses">Interesses:</label>
-    <input type="text" id="interesses" name="interesses" placeholder="Separe os interesses por vírgula">
-  
-    <button type="submit">Cadastrar</button>
-  </form>
+  // Se houver erros, renderizar o formulário com mensagens de erro
+  if (errors.length > 0) {
+    return res.status(400).sendFile(path.join(__dirname, 'public', 'index.html'));
+  }
 
-</body>
-</html>
+  // Se não houver erros, enviar uma resposta de sucesso
+  res.send(`Cadastro realizado com sucesso!
+    Nome: ${nome},
+    Email: ${email},
+    Telefone: ${telefone},
+    Data de Nascimento: ${dataNascimento},
+    Gênero: ${genero},
+    Interesses: ${interesses}`);
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+// Função auxiliar para validar o formato do e-mail
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Função auxiliar para validar o formato do número de telefone
+function validarFormulario() {
+  const telefoneInput = document.getElementById('telefone');
+  const telefoneValue = telefoneInput.value.replace(/\D/g, ''); // Remover não dígitos
+
+  // Validar se o telefone tem 10 dígitos
+  if (telefoneValue.length !== 10) {
+    alert('Por favor, insira um número de telefone válido.');
+    return false; // Impede o envio do formulário
+  }
+
+  return true; // Permite o envio do formulário
+}
