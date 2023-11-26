@@ -1,66 +1,94 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Cadastro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      box-sizing: border-box;
+    }
 
-app.use(bodyParser.urlencoded({ extended: true }));
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
 
-app.use(express.static(path.join(__dirname, 'public')));
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+    input[type="email"], input[type="tel"] {
+      background-color: #f2f8f5;
+    }
 
-app.post('/cadastro', (req, res) => {
-  // Obtenha os dados do formulário do corpo da solicitação
-  const nome = req.body.nome;
-  const email = req.body.email;
-  const telefone = req.body.telefone;
-  const dataNascimento = req.body.dataNascimento;
-  const genero = req.body.genero;
-  const interesses = req.body.interesses;
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-  // Validar os dados do formulário
-  const errors = [];
-  if (!nome) errors.push('Nome é obrigatório.');
-  if (!email || !isValidEmail(email)) errors.push('Email inválido.');
-  if (!telefone || !isValidPhone(telefone)) errors.push('Telefone inválido.');
-  if (!dataNascimento) errors.push('Data de Nascimento é obrigatória.');
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
 
-  // Se houver erros, renderizar o formulário com mensagens de erro
-  if (errors.length > 0) {
-    return res.status(400).sendFile(path.join(__dirname, 'public', 'index.html'));
-  }
+<form action="/cadastro" method="post">
+  <h1>Formulário de Cadastro de Usuário</h1>
 
-  // Se não houver erros, enviar uma resposta de sucesso
-  res.send(`Cadastro realizado com sucesso!
-    Nome: ${nome},
-    Email: ${email},
-    Telefone: ${telefone},
-    Data de Nascimento: ${dataNascimento},
-    Gênero: ${genero},
-    Interesses: ${interesses}`);
-});
+  <label for="nome">Nome:</label>
+  <input type="text" id="nome" name="nome" required>
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
 
-// Função auxiliar para validar o formato do e-mail
-function isValidEmail(email) {
-   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-  
-  return /\S+@\S+\.\S+/.test(email);
-}
+  <label for="telefone">Telefone:</label>
+  <input type="tel" id="telefone" name="telefone" pattern="^(\d{10}|\d{2}\s\d{4,5}-\d{4})$" placeholder="Digite o telefone (ex: 1234567890)" title="Formato de telefone inválido" required maxlength="15">
 
-// Função auxiliar para validar o formato do número de telefone
-function isValidPhone(phone) {
-     const phoneRegex = /^(\d{10}|\d{2}\s\d{4,5}-\d{4})$/;
-    return phoneRegex.test(phone);
-  // Retorna true se o telefone for válido, false caso contrário
-  return /\d{10}/.test(phone);
-}
+  <label for="dataNascimento">Data de Nascimento:</label>
+  <input type="date" id="dataNascimento" name="dataNascimento" required>
+
+  <label for="genero">Gênero:</label>
+  <select id="genero" name="genero">
+    <option value="masculino">Masculino</option>
+    <option value="feminino">Feminino</option>
+    <option value="outro">Outro</option>
+  </select>
+
+  <label for="interesses">Interesses:</label>
+  <input type="text" id="interesses" name="interesses" placeholder="Separe os interesses por vírgula">
+
+  <button type="submit">Cadastrar</button>
+</form>
+
+</body>
+</html>
