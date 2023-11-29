@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/cadastro', (req, res) => {
-  // Obtenha os dados do formulário do corpo da solicitação
+  
   const nome = req.body.nome;
   const email = req.body.email;
   const telefone = req.body.telefone;
@@ -21,19 +21,19 @@ app.post('/cadastro', (req, res) => {
   const genero = req.body.genero;
   const interesses = req.body.interesses;
 
-  // Validar os dados do formulário
+  
   const errors = [];
   if (!nome) errors.push('Nome é obrigatório.');
   if (!email || !isValidEmail(email)) errors.push('Email inválido.');
   if (!telefone || !isValidPhone(telefone)) errors.push('Telefone inválido.');
   if (!dataNascimento) errors.push('Data de Nascimento é obrigatória.');
 
-  // Se houver erros, renderizar o formulário com mensagens de erro
+ 
   if (errors.length > 0) {
     return res.status(400).sendFile(path.join(__dirname, 'public', 'index.html'));
   }
 
-  // Se não houver erros, enviar uma resposta de sucesso
+ 
   res.send(`Cadastro realizado com sucesso!
     Nome: ${nome},
     Email: ${email},
@@ -47,13 +47,13 @@ app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
 
-// Função auxiliar para validar o formato do e-mail
+
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
-// Função auxiliar para validar o formato do número de telefone
+
 function isValidPhone(phone) {
   const phoneRegex = /^\(\d{2}\)\s\d{5}-\d{4}$/;
 
